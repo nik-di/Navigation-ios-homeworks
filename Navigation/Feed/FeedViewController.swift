@@ -22,6 +22,7 @@ extension ButtonProtocol {
 		button.setTitle(title, for: .normal)
 		button.setTitleColor(textColor, for: .normal)
 		button.addTarget(self, action: tapHandler, for: .touchUpInside)
+		button.translatesAutoresizingMaskIntoConstraints = false
 		return button
 	}
 	
@@ -44,18 +45,34 @@ class FeedViewController: UIViewController, ButtonProtocol {
 	}
 	
 	private func setupMainButton() {
-		let button = createButton(title: "Перейти на пост", bgColor: .systemYellow, textColor: .darkText, tapHandler: #selector(onTapMainButton))
-		
-		view.addSubview(button)
-		
-		button.translatesAutoresizingMaskIntoConstraints = false
+		let firstButton = createButton(title: "Перейти на пост так", bgColor: .systemYellow, textColor: .darkText, tapHandler: #selector(onTapMainButton))
+		let secondButton = createButton(title: "Перейти на пост сяк", bgColor: .systemYellow, textColor: .darkText, tapHandler: #selector(onTapMainButton))
+		let verticalStackView = createStackView(withSpacing: 10, distribution: .fillEqually)
+
+		verticalStackView.addArrangedSubview(firstButton)
+		verticalStackView.addArrangedSubview(secondButton)
+		view.addSubview(verticalStackView)
+
 		let constraints = [
-			button.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -20),
-			button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			button.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40),
-			button.heightAnchor.constraint(equalToConstant: 50)
+			verticalStackView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+			verticalStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+			verticalStackView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.75),
+			verticalStackView.heightAnchor.constraint(equalToConstant: 110)
 		]
 		NSLayoutConstraint.activate(constraints)
+	}
+
+	private func createStackView(withSpacing spacing: CGFloat, andAxis axis: NSLayoutConstraint.Axis = .vertical, distribution: UIStackView.Distribution? = nil, alignment: UIStackView.Alignment? = nil) -> UIStackView {
+		let stackView = UIStackView()
+		stackView.spacing = spacing
+		stackView.axis = axis
+		if distribution != nil {
+			stackView.distribution = distribution!
+		} else if alignment != nil {
+			stackView.alignment = alignment!
+		}
+		stackView.translatesAutoresizingMaskIntoConstraints = false
+		return stackView
 	}
 	
 	@objc private func onTapMainButton(_ sender: UIButton) {
