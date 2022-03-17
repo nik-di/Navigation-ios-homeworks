@@ -19,6 +19,7 @@
 		75AC205627C6B756001D966C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AC205527C6B756001D966C /* ViewController.swift */; };
 		75AC205B27C6B758001D966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75AC205A27C6B758001D966C /* Assets.xcassets */; };
 		75AC205E27C6B758001D966C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75AC205C27C6B758001D966C /* LaunchScreen.storyboard */; };
+		75D5361C27DCDA5900229EBA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75D5361B27DCDA5900229EBA /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		75AC205A27C6B758001D966C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		75AC205D27C6B758001D966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75AC205F27C6B758001D966C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		75D5361B27DCDA5900229EBA /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		75A43FD127C6B93400C246B2 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				75D5361A27DCDA2800229EBA /* LoginPage */,
 				75D47EAC27D610E5000D1E43 /* ProfileHeader */,
 				75A43FC527C6B8FD00C246B2 /* ProfileViewController.swift */,
 			);
@@ -131,6 +134,14 @@
 				7568DA6727D560FC003930E2 /* ProfileHeaderView.xib */,
 			);
 			path = ProfileHeader;
+			sourceTree = "<group>";
+		};
+		75D5361A27DCDA2800229EBA /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				75D5361B27DCDA5900229EBA /* LoginViewController.swift */,
+			);
+			path = LoginPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 				75A43FCB27C6B8FD00C246B2 /* TabBarController.swift in Sources */,
 				75A43FCC27C6B8FD00C246B2 /* InfoViewController.swift in Sources */,
 				75A43FCE27C6B8FD00C246B2 /* FeedViewController.swift in Sources */,
+				75D5361C27DCDA5900229EBA /* LoginViewController.swift in Sources */,
 				75AC205427C6B756001D966C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
