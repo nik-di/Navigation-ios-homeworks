@@ -18,6 +18,7 @@ class ProfileViewController: UIViewController {
 		view.estimatedRowHeight = 44
 		view.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
 		view.register(PostsTableViewCell.self, forCellReuseIdentifier: "PostsCell")
+		view.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
 		return view
 	}()
 
@@ -30,6 +31,7 @@ class ProfileViewController: UIViewController {
 		super.viewDidLoad()
 		
 		navigationController?.navigationBar.prefersLargeTitles = false
+		navigationItem.backButtonTitle = ""
 
 		let appearance = UINavigationBarAppearance()
 		appearance.shadowImage = nil
@@ -56,24 +58,44 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
 
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return posts.count
+		return section == 0 ? 1 : posts.count
+	}
+
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 2
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath) as? PostsTableViewCell else { return tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath) }
+		var cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath)
 
-		let data = posts[indexPath.row]
-		let dataModel = UserPost(author: data.author, description: data.description, image: data.image, likes: data.likes, views: data.views)
-		cell.setData(with: dataModel)
+		if indexPath.section == 0 {
+			cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath)
+		} else {
+			let postsCell = tableView.dequeueReusableCell(withIdentifier: "PostsCell", for: indexPath)
+			if let castedCell = postsCell as? PostsTableViewCell {
+				let data = posts[indexPath.row]
+				let dataModel = UserPost(author: data.author, description: data.description, image: data.image, likes: data.likes, views: data.views)
+				castedCell.setData(with: dataModel)
+
+				cell = castedCell
+			}
+		}
 
 		return cell
 	}
 
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		print(section)
 		return profileHeaderView
 	}
 
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 300
+		return section == 0 ? 300 : 0
+	}
+
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if indexPath.section == 0 {
+			navigationController?.pushViewController(PhotosViewController(), animated: true)
+		}
 	}
 }
